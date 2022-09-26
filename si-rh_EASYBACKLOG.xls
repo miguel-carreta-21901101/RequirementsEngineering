@@ -1,0 +1,883 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<Workbook xmlns:html='http://www.w3.org/TR/REC-html40'
+          xmlns:o='urn:schemas-microsoft-com:office:office'
+          xmlns:ss='urn:schemas-microsoft-com:office:spreadsheet'
+          xmlns:x='urn:schemas-microsoft-com:office:excel'
+          xmlns='urn:schemas-microsoft-com:office:spreadsheet'>
+  <DocumentProperties xmlns='urn:schemas-microsoft-com:office:office'>
+    <LastAuthor>Ricardo Gonçalves</LastAuthor>
+    <Created>2022-06-12 05:16:28 UTC</Created>
+    <LastSaved>%= Time.now.utc %></LastSaved>
+    <Version>1.0</Version>
+  </DocumentProperties>
+  <OfficeDocumentSettings xmlns='urn:schemas-microsoft-com:office:office'>
+    <AllowPNG />
+  </OfficeDocumentSettings>
+  <ExcelWorkbook xmlns='urn:schemas-microsoft-com:office:excel'>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+  </ExcelWorkbook>
+  <Styles>
+    <Style ss:ID='Default' ss:Name='Normal'>
+      <Alignment ss:Vertical='Top' ss:WrapText='1' />
+      <Borders />
+      <Font ss:Color='#000000' ss:FontName='Calibri' ss:Size='12' x:Family='Swiss' />
+      <Interior />
+      <NumberFormat />
+      <Protection />
+    </Style>
+    <Style ss:ID='title'>
+      <Alignment ss:Vertical='Bottom' ss:WrapText='1' />
+      <Font ss:Bold='1' ss:Color='#000000' ss:FontName='Calibri' ss:Size='15' />
+    </Style>
+    <Style ss:ID='top-base-stats'>
+      <Alignment ss:Horizontal='Right' ss:Vertical='Center' ss:WrapText='1' />
+      <Font ss:Bold='0' ss:Color='#000000' ss:FontName='Calibri' ss:Size='11' />
+    </Style>
+    <Style ss:ID='table-header'>
+      <Alignment ss:Horizontal='Center' ss:Vertical='Center' ss:WrapText='1' />
+      <Font ss:Bold='1' ss:Color='#000000' ss:FontName='Calibri' ss:Size='12' />
+      <Interior ss:Color='#CCFFFF' ss:Pattern='Solid' />
+    </Style>
+    <Style ss:ID='numeric'>
+      <Alignment ss:Horizontal='Right' ss:Vertical='Top'/>
+      <Font ss:Bold='0' ss:Color='#000000' ss:FontName='Calibri' ss:Size='12' />
+    </Style>
+    <Style ss:ID='theme-summary'>
+      <Alignment ss:Horizontal='Left' ss:Vertical='Top' ss:WrapText='1' />
+      <Font ss:Color='#000000' ss:FontName='Calibri' ss:Size='12' />
+      <Interior ss:Color='#C0C0C0' ss:Pattern='Solid' />
+    </Style>
+    <Style ss:ID='theme-total'>
+      <Alignment ss:Horizontal='Right' ss:Vertical='Bottom' ss:WrapText='1' />
+      <Font ss:Bold='1' ss:Color='#000000' ss:FontName='Calibri' ss:Size='12' />
+      <Interior ss:Color='#C0C0C0' ss:Pattern='Solid' />
+    </Style>
+    <Style ss:ID='theme-cell'>
+      <Alignment ss:Vertical='Top' ss:WrapText='1' />
+      <Font ss:Bold='1' ss:Color='#000000' ss:FontName='Calibri' ss:Size='12' />
+    </Style>
+    <Style ss:ID='backlog-summary'>
+      <Alignment ss:Horizontal='Left' ss:Vertical='Top' ss:WrapText='1' />
+      <Font ss:Bold='1' ss:Color='#000000' ss:FontName='Calibri' ss:Size='14' />
+      <Interior ss:Color='#CCFFFF' ss:Pattern='Solid' />
+    </Style>
+    <Style ss:ID='backlog-total'>
+      <Alignment ss:Horizontal='Right' ss:Vertical='Bottom' ss:WrapText='1' />
+      <Font ss:Bold='1' ss:Color='#000000' ss:FontName='Calibri' ss:Size='14' />
+      <Interior ss:Color='#CCFFFF' ss:Pattern='Solid' />
+    </Style>
+    
+  </Styles>
+  <Worksheet ss:Name='Backlog Report'>
+  <Table>
+    <Column ss:AutoFitWidth="1" ss:Width="90" /> <!--Theme-->
+    <Column ss:AutoFitWidth="1" ss:Width="45" /> <!--ID-->
+    <Column ss:AutoFitWidth="1" ss:Width="240" /> <!--User Story-->
+    <Column ss:AutoFitWidth="1" ss:Width="240" /> <!--Acceptance Criteria-->
+    <Column ss:AutoFitWidth="1" ss:Width="240" /> <!--Comments-->
+    <Column ss:AutoFitWidth="1" ss:Width="50" /> <!--Sprint-->
+    <Column ss:AutoFitWidth="1" ss:Width="90" /> <!--Status-->
+      <Column ss:AutoFitWidth="1" ss:Width="45" /> <!--Score 50-->
+      <Column ss:AutoFitWidth="1" ss:Width="45" /> <!--Score 90-->
+    <Row ss:AutoFitHeight='0' ss:Height='18'>
+      <Cell ss:MergeAcross='3' ss:StyleID='title'>
+        <Data ss:Type='String'>SI-RH</Data>
+      </Cell>
+      <Cell ss:MergeAcross='4' ss:StyleID='top-base-stats'>
+        <Data ss:Type='String'></Data>
+      </Cell>
+    </Row>
+    <Row>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>Tema</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>ID</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>História de Usuário</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>Critérios de Aceitação</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>Comentários</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>Sprint</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>Status</Data>
+      </Cell>
+        <Cell ss:StyleID='table-header'>
+          <Data ss:Type='String'>50</Data>
+        </Cell>
+        <Cell ss:StyleID='table-header'>
+          <Data ss:Type='String'>90</Data>
+        </Cell>
+    </Row>
+        <Row>
+      <Cell ss:MergeDown='3' ss:StyleID='theme-cell'>
+        <Data ss:Type='String'>SI-RH-1 Candidatura</Data>
+      </Cell>
+      <Cell ss:Index='2'>
+  <Data ss:Type='String'>CAN1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Candidato
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> preencher o formulario
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> possa candidatar-me a ofertas de trabalho</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Os CV têm de respeitar as áreas pedidas&#10;&#13;b) Para as fichas de inscrição serem válidas, terão de respeitar os campos obrigatórios</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>O candidato tem que preencher todos os campos obrigatórios do formulário.&#10;&#13;&#10;&#13;A fim de facilitar a tarefa de informatização e gestão dos dados dos CV dos candidatos, a Empresa exige que os CV dos candidatos obedeçam a determinadas regras de apresentação</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell ss:Index='2'>
+  <Data ss:Type='String'>CAN2</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Candidato
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> alterar os meus dados
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> posso sempre ter os meus dados atualizados</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Os dados preenchidos pelo candidato têm que ser válidos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>Os candidatos podem atualizar os seus dados a qualquer altura.&#10;&#13;Os candidatos podem alterar os seus dados através da entrega de uma nova candidatura presencial ou através da alteração de dados do formulário online.</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell ss:Index='2'>
+  <Data ss:Type='String'>CAN3</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> Consultar e fazer Registos
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> Possa fazer análises</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Os melhores candidatos são notificados pelo secretário&#10;&#13;b) Possivel analise da lista de candidatos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>Listagens disponiveis que permitem uma gestão agilizada de farios elementos da empresa e ofertas:&#10;&#13;Lista dos perfis da oferta por local  &#10;&#13;Lista dos candidatos por local&#10;&#13;Consulta do CV de um candidato&#10;&#13;Lista dos candidatos por perfil da oferta &#10;&#13;Lista dos contratados (mensal e anual)</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+  <Row>
+    <Cell ss:Index='2' ss:MergeAcross='2' ss:StyleID='theme-summary'>
+      <Data ss:Type='String'>Total do tema &#x27;SI-RH-1 Candidatura&#x27;</Data>
+    </Cell>
+    <Cell ss:MergeAcross='4' ss:StyleID='theme-total'>
+      <Data ss:Type='String'>0.0 pontos</Data>
+    </Cell>
+  </Row>
+  <Row ss:AutoFitHeight='0' ss:Height='5'>
+    <Cell ss:MergeAcross='8' />
+  </Row>
+    <Row>
+      <Cell ss:MergeDown='1' ss:StyleID='theme-cell'>
+        <Data ss:Type='String'>SI-RH 2 BackOffice</Data>
+      </Cell>
+      <Cell ss:Index='2'>
+  <Data ss:Type='String'>BOF1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor, Secretário, Candidato
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> ter uma plataforma
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> possa gerir os meus conteudos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) O candidato tem acesso às funções de candidato para alterar os seus dados&#10;&#13;b) As alterações têm de cumprir os campos obrigatórios e os prazos estabelecidos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>É o centro de um sistema que gere as operações do mesmo.&#10;&#13;Os atores com permissões, o gestor e o secretário, podem editar os dados a qualquer altura de acordo com as normas da empresa.</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+  <Row>
+    <Cell ss:Index='2' ss:MergeAcross='2' ss:StyleID='theme-summary'>
+      <Data ss:Type='String'>Total do tema &#x27;SI-RH 2 BackOffice&#x27;</Data>
+    </Cell>
+    <Cell ss:MergeAcross='4' ss:StyleID='theme-total'>
+      <Data ss:Type='String'>0.0 pontos</Data>
+    </Cell>
+  </Row>
+  <Row ss:AutoFitHeight='0' ss:Height='5'>
+    <Cell ss:MergeAcross='8' />
+  </Row>
+    <Row>
+      <Cell ss:MergeDown='1' ss:StyleID='theme-cell'>
+        <Data ss:Type='String'>SI-RH 3 Ofertas de Trabalho</Data>
+      </Cell>
+      <Cell ss:Index='2'>
+  <Data ss:Type='String'>OFT1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> criar condidaturas
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> candidatos se possam candidatar</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Para ser criada uma oferta de trabalho tem que haver necessidade por parte da empresa  </Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>O gestor pode criar e editar as ofertas de trabalho e definir os critérios de candidatura à oferta de trabalho</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+  <Row>
+    <Cell ss:Index='2' ss:MergeAcross='2' ss:StyleID='theme-summary'>
+      <Data ss:Type='String'>Total do tema &#x27;SI-RH 3 Ofertas de Trabalho&#x27;</Data>
+    </Cell>
+    <Cell ss:MergeAcross='4' ss:StyleID='theme-total'>
+      <Data ss:Type='String'>0.0 pontos</Data>
+    </Cell>
+  </Row>
+  <Row ss:AutoFitHeight='0' ss:Height='5'>
+    <Cell ss:MergeAcross='8' />
+  </Row>
+    <Row>
+      <Cell ss:MergeDown='2' ss:StyleID='theme-cell'>
+        <Data ss:Type='String'>SI-RH 4 Recursos Humanos</Data>
+      </Cell>
+      <Cell ss:Index='2'>
+  <Data ss:Type='String'>RCH1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor ou Candidato
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> ter acesso a registos
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> possa fazer consultas</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>Agilizar o processo de analise relativamente aos candidatos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell ss:Index='2'>
+  <Data ss:Type='String'>RCH2</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> consultar candidatos
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> possa contratar candidatos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>O gestor pode consultar a lista dos contratados&#10;&#13;A contratação de um candidato deve ser refletida numa atualização da base de dados.&#10;&#13;A contratação é feita pelo secretário</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+  <Row>
+    <Cell ss:Index='2' ss:MergeAcross='2' ss:StyleID='theme-summary'>
+      <Data ss:Type='String'>Total do tema &#x27;SI-RH 4 Recursos Humanos&#x27;</Data>
+    </Cell>
+    <Cell ss:MergeAcross='4' ss:StyleID='theme-total'>
+      <Data ss:Type='String'>0.0 pontos</Data>
+    </Cell>
+  </Row>
+  <Row ss:AutoFitHeight='0' ss:Height='5'>
+    <Cell ss:MergeAcross='8' />
+  </Row>
+    <Row>
+      <Cell ss:MergeDown='2' ss:StyleID='theme-cell'>
+        <Data ss:Type='String'>SI-RH 5 Avaliação</Data>
+      </Cell>
+      <Cell ss:Index='2'>
+  <Data ss:Type='String'>SRA1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> definir critérios de avaliação
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> o candidato satisfaça as necessidades da oferta de trabalho</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Apenas os candidatos que satisfazem os critérios obrigatórios, são propostos para avaliação</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>O gestor através da oferta de trabalho, define as características procuradas no candidato.&#10;&#13;A candidatura é analisada pelo gestor.&#10;&#13;O grupo de avaliação realiza a prova de comprovação de competências.</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell ss:Index='2'>
+  <Data ss:Type='String'>SRA2</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Grupo de avaliação
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> avaliar os candidatos
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> os candidatos avaliados sejam propostos para contratação</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Apenas os candidatos selecionados para avaliação podem ser submetidos para a mesma</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>Agendamento de entrevistas&#10;&#13;Armazenamento de avaliações&#10;&#13;Notificar os candidatos sobre os resultados</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+  <Row>
+    <Cell ss:Index='2' ss:MergeAcross='2' ss:StyleID='theme-summary'>
+      <Data ss:Type='String'>Total do tema &#x27;SI-RH 5 Avaliação&#x27;</Data>
+    </Cell>
+    <Cell ss:MergeAcross='4' ss:StyleID='theme-total'>
+      <Data ss:Type='String'>0.0 pontos</Data>
+    </Cell>
+  </Row>
+  <Row ss:AutoFitHeight='0' ss:Height='5'>
+    <Cell ss:MergeAcross='8' />
+  </Row>
+    <Row>
+      <Cell ss:MergeDown='1' ss:StyleID='theme-cell'>
+        <Data ss:Type='String'>SI-RH 6 Departamento Juridico</Data>
+      </Cell>
+      <Cell ss:Index='2'>
+  <Data ss:Type='String'>DPJ1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Departamento Juridico
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> aceder aos registos
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> Analaisar e averiguar legalidades</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Para os candidatos serem selecionados , as suas candidaturas terão que ser válidas</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>O gestor poderá apreciar um documento como invalido. &#10;&#13;Os documentos marcados como inválidos são comunicados ao candidato através de uma notificação </Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+  <Row>
+    <Cell ss:Index='2' ss:MergeAcross='2' ss:StyleID='theme-summary'>
+      <Data ss:Type='String'>Total do tema &#x27;SI-RH 6 Departamento Juridico&#x27;</Data>
+    </Cell>
+    <Cell ss:MergeAcross='4' ss:StyleID='theme-total'>
+      <Data ss:Type='String'>0.0 pontos</Data>
+    </Cell>
+  </Row>
+  <Row ss:AutoFitHeight='0' ss:Height='5'>
+    <Cell ss:MergeAcross='8' />
+  </Row>
+
+    <Row ss:AutoFitHeight='0' ss:Height='18'>
+      <Cell ss:MergeAcross='3' ss:StyleID='backlog-summary'>
+        <Data ss:Type='String'>Total do Backlog &#x27;SI-RH&#x27;</Data>
+      </Cell>
+      <Cell ss:MergeAcross='4' ss:StyleID='backlog-total'>
+        <Data ss:Type='String'>0.0 pontos</Data>
+      </Cell>
+    </Row>
+  </Table>
+  <WorksheetOptions xmlns='urn:schemas-microsoft-com:office:excel'>
+    <PageLayoutZoom>0</PageLayoutZoom>
+    <Selected />
+    <Panes />
+    <ProtectObjects>False</ProtectObjects>
+    <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+</Worksheet>
+  <Worksheet ss:Name='Story List'>
+  <Table>
+    <Column ss:AutoFitWidth="1" ss:Width="90" /> <!--Theme-->
+    <Column ss:AutoFitWidth="1" ss:Width="45" /> <!--ID-->
+    <Column ss:AutoFitWidth="1" ss:Width="240" /> <!--User Story-->
+    <Column ss:AutoFitWidth="1" ss:Width="240" /> <!--Acceptance Criteria-->
+    <Column ss:AutoFitWidth="1" ss:Width="240" /> <!--Comments-->
+    <Column ss:AutoFitWidth="1" ss:Width="50" /> <!--Sprint-->
+    <Column ss:AutoFitWidth="1" ss:Width="50" /> <!--Status-->
+      <Column ss:AutoFitWidth="1" ss:Width="45" /> <!--Score 50-->
+      <Column ss:AutoFitWidth="1" ss:Width="45" /> <!--Score 90-->
+    <Row>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>Tema</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>ID</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>História de Usuário</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>Critérios de Aceitação</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>Comentários</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>Sprint</Data>
+      </Cell>
+      <Cell ss:StyleID='table-header'>
+        <Data ss:Type='String'>Status</Data>
+      </Cell>
+        <Cell ss:StyleID='table-header'>
+          <Data ss:Type='String'>50</Data>
+        </Cell>
+        <Cell ss:StyleID='table-header'>
+          <Data ss:Type='String'>90</Data>
+        </Cell>
+    </Row>
+        <Row>
+      <Cell>
+  <Data ss:Type='String'>SI-RH-1 Candidatura</Data>
+</Cell>
+<Cell ss:Index='2'>
+  <Data ss:Type='String'>CAN1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Candidato
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> preencher o formulario
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> possa candidatar-me a ofertas de trabalho</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Os CV têm de respeitar as áreas pedidas&#10;&#13;b) Para as fichas de inscrição serem válidas, terão de respeitar os campos obrigatórios</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>O candidato tem que preencher todos os campos obrigatórios do formulário.&#10;&#13;&#10;&#13;A fim de facilitar a tarefa de informatização e gestão dos dados dos CV dos candidatos, a Empresa exige que os CV dos candidatos obedeçam a determinadas regras de apresentação</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell>
+  <Data ss:Type='String'>SI-RH-1 Candidatura</Data>
+</Cell>
+<Cell ss:Index='2'>
+  <Data ss:Type='String'>CAN2</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Candidato
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> alterar os meus dados
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> posso sempre ter os meus dados atualizados</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Os dados preenchidos pelo candidato têm que ser válidos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>Os candidatos podem atualizar os seus dados a qualquer altura.&#10;&#13;Os candidatos podem alterar os seus dados através da entrega de uma nova candidatura presencial ou através da alteração de dados do formulário online.</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell>
+  <Data ss:Type='String'>SI-RH-1 Candidatura</Data>
+</Cell>
+<Cell ss:Index='2'>
+  <Data ss:Type='String'>CAN3</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> Consultar e fazer Registos
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> Possa fazer análises</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Os melhores candidatos são notificados pelo secretário&#10;&#13;b) Possivel analise da lista de candidatos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>Listagens disponiveis que permitem uma gestão agilizada de farios elementos da empresa e ofertas:&#10;&#13;Lista dos perfis da oferta por local  &#10;&#13;Lista dos candidatos por local&#10;&#13;Consulta do CV de um candidato&#10;&#13;Lista dos candidatos por perfil da oferta &#10;&#13;Lista dos contratados (mensal e anual)</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell>
+  <Data ss:Type='String'>SI-RH 2 BackOffice</Data>
+</Cell>
+<Cell ss:Index='2'>
+  <Data ss:Type='String'>BOF1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor, Secretário, Candidato
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> ter uma plataforma
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> possa gerir os meus conteudos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) O candidato tem acesso às funções de candidato para alterar os seus dados&#10;&#13;b) As alterações têm de cumprir os campos obrigatórios e os prazos estabelecidos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>É o centro de um sistema que gere as operações do mesmo.&#10;&#13;Os atores com permissões, o gestor e o secretário, podem editar os dados a qualquer altura de acordo com as normas da empresa.</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell>
+  <Data ss:Type='String'>SI-RH 3 Ofertas de Trabalho</Data>
+</Cell>
+<Cell ss:Index='2'>
+  <Data ss:Type='String'>OFT1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> criar condidaturas
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> candidatos se possam candidatar</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Para ser criada uma oferta de trabalho tem que haver necessidade por parte da empresa  </Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>O gestor pode criar e editar as ofertas de trabalho e definir os critérios de candidatura à oferta de trabalho</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell>
+  <Data ss:Type='String'>SI-RH 4 Recursos Humanos</Data>
+</Cell>
+<Cell ss:Index='2'>
+  <Data ss:Type='String'>RCH1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor ou Candidato
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> ter acesso a registos
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> possa fazer consultas</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>Agilizar o processo de analise relativamente aos candidatos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell>
+  <Data ss:Type='String'>SI-RH 4 Recursos Humanos</Data>
+</Cell>
+<Cell ss:Index='2'>
+  <Data ss:Type='String'>RCH2</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> consultar candidatos
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> possa contratar candidatos</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>O gestor pode consultar a lista dos contratados&#10;&#13;A contratação de um candidato deve ser refletida numa atualização da base de dados.&#10;&#13;A contratação é feita pelo secretário</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell>
+  <Data ss:Type='String'>SI-RH 5 Avaliação</Data>
+</Cell>
+<Cell ss:Index='2'>
+  <Data ss:Type='String'>SRA1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Gestor
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> definir critérios de avaliação
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> o candidato satisfaça as necessidades da oferta de trabalho</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Apenas os candidatos que satisfazem os critérios obrigatórios, são propostos para avaliação</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>O gestor através da oferta de trabalho, define as características procuradas no candidato.&#10;&#13;A candidatura é analisada pelo gestor.&#10;&#13;O grupo de avaliação realiza a prova de comprovação de competências.</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell>
+  <Data ss:Type='String'>SI-RH 5 Avaliação</Data>
+</Cell>
+<Cell ss:Index='2'>
+  <Data ss:Type='String'>SRA2</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Grupo de avaliação
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> avaliar os candidatos
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> os candidatos avaliados sejam propostos para contratação</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Apenas os candidatos selecionados para avaliação podem ser submetidos para a mesma</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>Agendamento de entrevistas&#10;&#13;Armazenamento de avaliações&#10;&#13;Notificar os candidatos sobre os resultados</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+    <Row>
+      <Cell>
+  <Data ss:Type='String'>SI-RH 6 Departamento Juridico</Data>
+</Cell>
+<Cell ss:Index='2'>
+  <Data ss:Type='String'>DPJ1</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'><Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Como</Font> Departamento Juridico
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Eu quero</Font> aceder aos registos
+&#10;&#13;<Font html:Color="#999999" xmlns="http://www.w3.org/TR/REC-html40">Para que</Font> Analaisar e averiguar legalidades</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>a) Para os candidatos serem selecionados , as suas candidaturas terão que ser válidas</Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'>O gestor poderá apreciar um documento como invalido. &#10;&#13;Os documentos marcados como inválidos são comunicados ao candidato através de uma notificação </Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+<Cell>
+  <Data ss:Type='String'></Data>
+</Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+  <Cell ss:StyleID='numeric'>
+    <Data ss:Type='String'></Data>
+  </Cell>
+
+    </Row>
+
+  </Table>
+  <WorksheetOptions xmlns='urn:schemas-microsoft-com:office:excel'>
+    <PageLayoutZoom>0</PageLayoutZoom>
+    <Selected />
+    <Panes />
+    <ProtectObjects>False</ProtectObjects>
+    <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range='R1C1:R1C9' xmlns='urn:schemas-microsoft-com:office:excel'></AutoFilter>
+</Worksheet>
+</Workbook>
